@@ -26,26 +26,27 @@ namespace LeftOuterJoinWithFirstOrDeafult
             List<CustomerVisitHistory> customerVisitHisorys = new List<CustomerVisitHistory>
             {
                 new CustomerVisitHistory{Id=1,CustomerId=1,VisitDate="2021-01-01"},
-                new CustomerVisitHistory{Id=2,CustomerId=1,VisitDate="2021-01-01"},
-                new CustomerVisitHistory{Id=3,CustomerId=2,VisitDate="2021-01-01"},
-                new CustomerVisitHistory{Id=4,CustomerId=2,VisitDate="2021-01-01"},
-                new CustomerVisitHistory{Id=5,CustomerId=3,VisitDate="2021-01-01"},
-                new CustomerVisitHistory{Id=6,CustomerId=3,VisitDate="2021-01-01"}
+                new CustomerVisitHistory{Id=2,CustomerId=1,VisitDate="2021-01-02"},
+                new CustomerVisitHistory{Id=3,CustomerId=2,VisitDate="2021-01-03"},
+                new CustomerVisitHistory{Id=4,CustomerId=2,VisitDate="2021-01-04"},
+                new CustomerVisitHistory{Id=5,CustomerId=3,VisitDate="2021-01-05"},
+                new CustomerVisitHistory{Id=6,CustomerId=3,VisitDate="2021-01-06"}
             };
 
              
             var customerVisit = from c in customerList
                                 join cv in customerVisitHisorys.AsQueryable() on c.Id equals cv.CustomerId into cvGroup
-                                from cvHistory in cvGroup.OrderByDescending(cvr => cvr.CustomerId).Take(1).DefaultIfEmpty()
+                                from cvHistory in cvGroup.OrderByDescending(cvr => cvr.Id).Take(1).DefaultIfEmpty()
                                 select new CustomerVisitDetails
                                 {
                                     CustomerId = c.Id,
                                     FullName = c.FirstName + " " + c.LastName,
-                                    VisitDate=cvHistory==null?"": cvHistory.VisitDate
+                                    IsCustomerVisited = cvHistory==null?"No": "Yes",
+                                    VisitDate = cvHistory==null?"": cvHistory.VisitDate
                                 };
             foreach (var cust in customerVisit)
             {
-                Console.WriteLine("Customer No :{0} | Customer Name: {1} | Visit Date: {2}",cust.CustomerId,cust.FullName,cust.VisitDate);
+                Console.WriteLine("Customer No :{0} | Customer Name: {1} | Is Customer Visited: {2} | Visit Date: {3}",cust.CustomerId,cust.FullName,cust.IsCustomerVisited, cust.VisitDate);
             }
             Console.ReadKey();
 
@@ -55,6 +56,7 @@ namespace LeftOuterJoinWithFirstOrDeafult
     {
         public int CustomerId { get; set; }
         public string FullName { get; set; }
+        public string IsCustomerVisited { get; set; }
         public string VisitDate { get; set; }
     }
     class CustomerInformation
