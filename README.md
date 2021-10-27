@@ -41,4 +41,13 @@ is visited and only get the last visited date ohterwise show the customer is not
                           IsCustomerVisited = cvHistory==null?"No": "Yes",
                           VisitDate = cvHistory==null?"": cvHistory.VisitDate
                       };
-    ```
+```
+# Let's see the output of the query in follwoing table.
+| Customer Id   | Full Name     | Is Visited | Visit Date |
+| ------------- |:-------------:| ----------:| ----------:|
+| 1             | Raju Ahmed    | Yes        | 2021-01-02 |
+| 2             | Tahira Biswas | Yes        | 2021-01-04 |
+| 3             | Shohag Mia    | Yes        | 2021-01-06 |
+| 4             | Saiful Islam  | No         |            |
+
+
