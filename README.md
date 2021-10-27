@@ -5,25 +5,30 @@ not matter if child item exists or not for the corresponding parent data. Let's 
 
 ---
 Suppose we've following two table/entity And data for these table.
-1. CustomerInformation data
+
+<table>
+<tr><th>1. CustomerInformation data</th><th>2. CustomerVisitHistory Data</th></tr>
+<tr><td>
 
 | Id            | FirstName     | LastName  |
-| ------------- |:-------------:| -----:    |
+| ------------- |:------------- |:----------|
 | 1             | Raju          | Ahmed     |
 | 2             | Tahira        | Biswas    |
 | 3             | Shohag        | Mia       |
 | 4             | Saiful        | Islam     |
- 
-2. CustomerVisitHistory Data
+
+</td><td>
 
 | Id            | CustomerId    | VisitDate  |
-| ------------- |:-------------:| ----------:|
+| ------------- |:-------------:|:-----------|
 | 1             | 1             | 2021-01-01 |
 | 2             | 1             | 2021-01-02 |
 | 3             | 2             | 2021-01-03 |
 | 4             | 2             | 2021-01-04 |
 | 5             | 3             | 2021-01-03 |
 | 6             | 3             | 2021-01-04 |
+
+</td></tr> </table>
 
 
 Now we want to see, if the customer is visited or not. If there is any data found in *CustomerVisitHistory* table. If customer is found in *CustomerVisitHistory* then the customer
@@ -44,7 +49,7 @@ is visited and only get the last visited date ohterwise show the customer is not
 ```
 # Let's see the output of the query in follwoing table.
 | Customer Id   | Full Name     | Is Visited | Visit Date |
-| ------------- |:-------------:| ----------:| ----------:|
+| :------------ |:--------------|:----------:|:-----------|
 | 1             | Raju Ahmed    | Yes        | 2021-01-02 |
 | 2             | Tahira Biswas | Yes        | 2021-01-04 |
 | 3             | Shohag Mia    | Yes        | 2021-01-06 |
