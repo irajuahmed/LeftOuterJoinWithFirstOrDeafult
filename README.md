@@ -24,3 +24,21 @@ Suppose we've following two table/entity And data for these table.
 | 4             | 2             | 2021-01-04 |
 | 5             | 3             | 2021-01-03 |
 | 6             | 3             | 2021-01-04 |
+
+
+Now we want to see, if the customer is visited or not. If there is any data found in *CustomerVisitHistory* table. If customer is found in *CustomerVisitHistory* then the customer
+is visited and only get the last visited date ohterwise show the customer is not visited. 
+
+## Now we'll see, how to achive this goal by using LINQ in C#.
+ ```csharp
+   ar customerVisit = from c in customerList
+                      join cv in customerVisitHisorys.AsQueryable() on c.Id equals cv.CustomerId into cvGroup
+                      from cvHistory in cvGroup.OrderByDescending(cvr => cvr.Id).Take(1).DefaultIfEmpty()
+                      select new CustomerVisitDetails
+                      {
+                          CustomerId = c.Id,
+                          FullName = c.FirstName + " " + c.LastName,
+                          IsCustomerVisited = cvHistory==null?"No": "Yes",
+                          VisitDate = cvHistory==null?"": cvHistory.VisitDate
+                      };
+    ```
