@@ -36,7 +36,7 @@ is visited and only get the last visited date ohterwise show the customer is not
 
 ## Now we'll see, how to achive this goal by using LINQ in C#.
  ```csharp
-   ar customerVisit = from c in customerList
+   var customerVisit = from c in customerList
                       join cv in customerVisitHisorys.AsQueryable() on c.Id equals cv.CustomerId into cvGroup
                       from cvHistory in cvGroup.OrderByDescending(cvr => cvr.Id).Take(1).DefaultIfEmpty()
                       select new CustomerVisitDetails
